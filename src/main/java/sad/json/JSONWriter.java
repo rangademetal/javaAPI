@@ -1,4 +1,4 @@
-package sad.json.write;
+package sad.json;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

@@ -1,30 +1,29 @@
-import sad.json.write.JSONWriter;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import sad.database.*;
+
+import java.sql.SQLException;
 
 public class Main {
 
-    static JSONObject x = null;
+    public static void main(String [] args) throws SQLException, ClassNotFoundException {
+        Database db = new Schema("jdbc:mysql://localhost:3306/","root","Sad1996.");
 
-    static String[] arrColumn = new String[] {"Name","Password","Age"};
-    static String[] arrRow;
+        System.out.println("SHOW SCHEMAS");
+        db.getSchema();
 
-    public static void main(String [] args) throws Exception {
+        System.out.println("SHOW TABLES;");
+        db.getTable("tutorials");
 
-        JSONWriter write = new JSONWriter();
-        JSONObject[] x = new JSONObject[2];
-        JSONArray v = new JSONArray();
+        System.out.println("DROP TABLE");
+        db.removeTable("tutorials","test");
 
-        arrRow = new String[]{"asd", "bsd", "asdzx"};
-        x[0] = write.JSONObjectSet(arrColumn, arrRow);
+        System.out.println("SHOW TABLES;");
+        db.getTable("tutorials");
 
-        arrRow = new String[]{"asd1", "bsd1", "asdzx1"};
-        x[1] = write.JSONObjectSet(arrColumn, arrRow);
 
-        for (int i = 0; i < x.length; i++) {
-            JSONObject a = write.JSONTable("Employee", x[i]);
-            v.add(a);
-        }
-        write.writeJSON("test.json", v);
+//        db.setSchema("Test");
+//        db.getSchema();
+//        db.removeSchema("Test");
+//        db.getSchema();
+
     }
 }
